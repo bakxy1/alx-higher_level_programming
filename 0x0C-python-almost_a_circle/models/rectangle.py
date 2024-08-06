@@ -133,12 +133,22 @@ class Rectangle(Base):
         else:
             for k, v in kwargs.items():
                 if k == "id":
-                    self.id = kwargs[k]
+                    self.id = v
                 elif k == "width":
-                    self.width = kwargs[k]
+                    self.width = v
                 elif k == "height":
-                    self.height = kwargs[k]
+                    self.height = v
                 elif k == "x":
-                    self.x = kwargs[k]
+                    self.x = v
                 elif k == "y":
-                    self.y = kwargs[k]
+                    self.y = v
+
+    def to_dictionary(self):
+        """Return dict of object"""
+        return {
+            "id": self.id,
+            "width": self.width,
+            "height": self.height,
+            "x": self.x,
+            "y": self.y,
+        }
