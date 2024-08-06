@@ -29,7 +29,7 @@ class Rectangle(Base):
         Returns:
             None
         """
-        if type(width) != int:
+        if type(width) is not int:
             raise TypeError(f"width must be an integer")
         elif width <= 0:
             raise ValueError(f"width must be > 0")
@@ -50,7 +50,7 @@ class Rectangle(Base):
         Returns:
             None
         """
-        if type(height) != int:
+        if type(height) is not int:
             raise TypeError(f"height must be an integer")
         elif height <= 0:
             raise ValueError(f"height must be > 0")
@@ -71,7 +71,7 @@ class Rectangle(Base):
         Returns:
             None
         """
-        if type(x) != int:
+        if type(x) is not int:
             raise TypeError(f"x must be an integer")
         elif x < 0:
             raise ValueError(f"x must be >= 0")
@@ -92,8 +92,12 @@ class Rectangle(Base):
         Returns:
             None
         """
-        if type(y) != int:
+        if type(y) is not int:
             raise TypeError(f"y must be an integer")
         elif y < 0:
             raise ValueError(f"y must be >= 0")
         self.__y = y
+
+    def area(self):
+        """Return area of rectangle"""
+        return self.width * self.height
