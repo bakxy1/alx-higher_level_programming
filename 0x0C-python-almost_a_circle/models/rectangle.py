@@ -115,3 +115,17 @@ class Rectangle(Base):
             f"[Rectangle] ({self.id}) {self.x}/{self.y} "
             + f"- {self.width}/{self.height}"
         )
+
+    def update(self, *args):
+        """Updates attributes"""
+        for idx in range(len(args)):
+            if idx == 0:
+                self.id = args[idx]
+            elif idx == 1:
+                self.width = args[idx]
+            elif idx == 2:
+                self.height = args[idx]
+            elif idx == 3:
+                self.x = args[idx]
+            elif idx == 4:
+                self.y = args[idx]
