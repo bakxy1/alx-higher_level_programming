@@ -106,3 +106,10 @@ class Rectangle(Base):
         """Displays rectangle in stdout"""
         for _ in range(self.height):
             print("#" * self.width)
+
+    def __str__(self):
+        """Overrides string method for this class"""
+        return (
+            f"[Rectangle] ({self.id}) {self.x}/{self.y} "
+            + f"- {self.width}/{self.height}"
+        )
