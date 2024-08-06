@@ -43,6 +43,10 @@ class Square(Rectangle):
                 elif k == "y":
                     self.y = v
 
+    def to_dictionary(self):
+        """Overrides Rectangle's method"""
+        return {"id": self.id, "size": self.size, "x": self.x, "y": self.y}
+
     def __str__(self):
         """Overrides Rectangle's string method"""
         return f"[Square] ({self.id}) {self.x}/{self.y} " + f"- {self.width}"
