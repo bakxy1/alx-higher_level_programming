@@ -46,8 +46,21 @@ class Base:
         dummy = None
         try:
             dummy = cls(width=1, height=1)
-        except:
+        except Exception:
             dummy = cls(size=1)
 
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """Return  list of instances read from file"""
+        lt = []
+        try:
+            string = ""
+            with open(f"{cls.__name__}.json", "r") as file:
+                string = file.read()
+            lt = [cls.create(**d) for d in cls.from_json_string(string)]
+        except FileNotFoundError:
+            pass
+        return lt
