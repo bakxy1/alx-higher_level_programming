@@ -39,3 +39,15 @@ class Base:
     def from_json_string(json_string):
         """Returns list of dictionaries from argument"""
         return [] if json_string is None else json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Returns instance represented by dictionary"""
+        dummy = None
+        try:
+            dummy = cls(width=1, height=1)
+        except:
+            dummy = cls(size=1)
+
+        dummy.update(**dictionary)
+        return dummy
