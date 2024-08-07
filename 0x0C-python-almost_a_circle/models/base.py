@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 """Module defines Class `Base`"""
 
+import json
+from typing import Dict, List
+
 
 class Base:
     """Base class"""
@@ -15,3 +18,10 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries: List[Dict]):
+        """Returns JSON string of passed argument"""
+        if list_dictionaries is not None:
+            return json.dumps(list_dictionaries)
+        return "[]"
