@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module defines Class `Base`"""
 
+import csv
 import json
 from typing import Dict, List
 
@@ -63,4 +64,34 @@ class Base:
             lt = [cls.create(**d) for d in cls.from_json_string(string)]
         except FileNotFoundError:
             pass
+        return lt
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Saves to a csv file"""
+        if list_objs is not None:
+            list_dicts = [obj.to_dictionary() for obj in list_objs]
+            fieldnames = list_dicts[0].keys()
+
+            with open(f"{cls.__name__}.csv", "w", newline="") as file:
+                writer = csv.DictWriter(file, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(list_dicts)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Retrieves from csv file"""
+        lt = []
+
+        try:
+            with open(f"{cls.__name__}.csv", "r", newline="") as file:
+                reader = csv.DictReader(file)
+
+                for row in reader:
+                    for k, v in row.items():
+                        row[k] = int(v)
+                    lt.append(cls.create(**dict(row)))
+        except FileNotFoundError:
+            pass
+
         return lt
