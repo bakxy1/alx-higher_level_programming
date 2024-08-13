@@ -3,7 +3,6 @@
 from sys import argv
 
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.engine import URL
 from sqlalchemy import Column, Integer, String
 
 Base = declarative_base()

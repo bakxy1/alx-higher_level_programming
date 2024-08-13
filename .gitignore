@@ -1,3 +1,4 @@
 *-main.py
 __pycache__/
 .venv
+6-model_state.py
