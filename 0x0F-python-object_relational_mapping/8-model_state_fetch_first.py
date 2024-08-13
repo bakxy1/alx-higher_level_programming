@@ -1,24 +1,25 @@
 #!/usr/bin/python3
-"""Module lists first state in `hbtn_0e_6_usa`.`states` table."""
+"""List all state records"""
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from sqlalchemy.util.langhelpers import warn
-
+from model_state import Base, State
 
 if __name__ == "__main__":
-    from sys import argv
-    from model_state import Base, State
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import sessionmaker
-
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(argv[1], argv[2], argv[3])
+        "mysql+mysqldb://{}:{}@localhost/{}".format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True,
     )
+    Base.metadata.create_all(engine)
 
     session = sessionmaker(bind=engine)()
 
-    first_record = session.query(State).first()
+    first_state = session.query(State).first()
 
-    if first_record:
-        print("{}: {}".format(first_record.id, first_record.name))
+    if first_state:
+        print("{}: {}".format(first_state.id, first_state.name))
     else:
         print("Nothing")
